@@ -4,7 +4,7 @@ using System.Collections;
 public class Player1Control : MonoBehaviour {
 	public float Speed = 0f;
 	public float MaxJumpTime = 2f;
-	public float JumpForce;
+	public float JumpForce = 3f;
 	private float move = 0f;
 	private float JumpTime = 0f;
 	private bool CanJump;
@@ -38,7 +38,7 @@ public class Player1Control : MonoBehaviour {
 		rigidbody2D.velocity = new Vector2 (move * Speed, rigidbody2D.velocity.y);
 		if (Input.GetKey (KeyCode.W)  && CanJump)
 		{
-			rigidbody2D.AddForce (new Vector2 (rigidbody2D.velocity.x,JumpForce));
+			rigidbody2D.AddForce (new Vector2 (0,JumpForce));
 			CanJump = false;
 			JumpTime  = MaxJumpTime;
 		}

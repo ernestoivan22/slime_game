@@ -24,9 +24,9 @@ public class Player1Control : MonoBehaviour {
 			CanJump = true;
 			JumpTime  = MaxJumpTime;
 		}
-		if (Input.GetKey (KeyCode.D)) {
+		if (Input.GetKey (KeyCode.RightArrow)) {
 				movex = 1;	
-		} else if (Input.GetKey (KeyCode.A)) {
+		} else if (Input.GetKey (KeyCode.LeftArrow)) {
 				movex = -1;	
 		} else {
 				movex = 0;
@@ -36,7 +36,7 @@ public class Player1Control : MonoBehaviour {
 	void FixedUpdate () {
 		move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * Speed, rigidbody2D.velocity.y);
-		if (Input.GetKey (KeyCode.W)  && CanJump)
+		if (Input.GetKey (KeyCode.UpArrow)  && CanJump)
 		{
 			rigidbody2D.AddForce (new Vector2 (0,JumpForce));
 			CanJump = false;

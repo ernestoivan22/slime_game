@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class connect_to_server : MonoBehaviour {
+	Client tcpclnt;
 	public Texture backgroundTexture;
 	int esHost;
 	public string stringToEdit = "Ingrese IP a conectarse";
@@ -20,9 +21,9 @@ public class connect_to_server : MonoBehaviour {
 		//botones
 		stringToEdit = GUI.TextField (new Rect(10,10,200,20),stringToEdit,25);
 		if(GUI.Button(new Rect(Screen.width*0.25f, Screen.height * 0.5f, Screen.width*0.5f, Screen.height*0.1f),"Connect")){
-			esHost = 1;
-			PlayerPrefs.SetInt("esHost",esHost);
-			Application.LoadLevel("Inicial");
+
+			tcpclnt = new Client(stringToEdit);
+
 			
 		}
 	}

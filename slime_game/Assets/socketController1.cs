@@ -7,7 +7,7 @@ using System;
 
 public class socketController1 : MonoBehaviour {
 	static bool creado = false;
-	Server tcpServer;
+	static Server tcpServer;
 	float p1VelocityX, p1VelocityY, p2VelocityX = 0, p2VelocityY = 0;
 
 	private bool mRunning;

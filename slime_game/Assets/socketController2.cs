@@ -3,7 +3,7 @@ using System.Collections;
 using System.Threading;
 
 public class socketController2 : MonoBehaviour {
-	Client tcpCliente;
+	static Client tcpCliente;
 	Thread mThread;
 	bool connected = false;
 	string ipObtenida;

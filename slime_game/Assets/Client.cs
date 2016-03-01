@@ -17,7 +17,7 @@ public class Client {
 			clientSocket = new TcpClient ();
 
 			Debug.Log ("Connecting.....");
-			clientSocket.Connect (server_adress, 8001);
+			clientSocket.Connect (server_adress, 1024);
 			connected = true;
 			Debug.Log ("Connected");
 

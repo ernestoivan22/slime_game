@@ -3,11 +3,12 @@ using System.Collections;
 using System.Threading;
 using System.Net.Sockets;
 using System.IO;
+using System;
 
 public class socketController1 : MonoBehaviour {
 	static bool creado = false;
-	Server miServer;
-	float p1VelocityX,p1VelocityY,p2VelocityX = 0,p2VelocityY = 0;
+	Server tcpServer;
+	float p1VelocityX, p1VelocityY, p2VelocityX = 0, p2VelocityY = 0;
 
 	private bool mRunning;
 	Thread mThread;
@@ -19,7 +20,7 @@ public class socketController1 : MonoBehaviour {
 			Application.LoadLevel(1);
 			creado = true;		*/
 			mRunning = true;
-			ThreadStart ts = new ThreadStart(SayHello);
+			ThreadStart ts = new ThreadStart(threadServer);
 			mThread = new Thread(ts);
 			mThread.Start();
 			print("Thread done...");
@@ -35,42 +36,26 @@ public class socketController1 : MonoBehaviour {
 		DontDestroyOnLoad (transform.gameObject);
 	}
 
-	void SayHello()
+	void threadServer()
 	{
-				/*try {
-						tcp_Listener = new TcpListener (52432);
-						tcp_Listener.Start ();
-						print ("Server Start");
-						while (mRunning) {
-								// check if new connections are pending, if not, be nice and sleep 100ms
-								if (!tcp_Listener.Pending ()) {
-										Thread.Sleep (100);
-								} else {
-										print ("1");
-										TcpClient client = tcp_Listener.AcceptTcpClient ();
-										print ("2");
-										NetworkStream ns = client.GetStream ();
-										print ("3");
-										StreamReader reader = new StreamReader (ns);
-										print ("4");
-										//msg = reader.ReadLine();
-										//print(msg);
-										reader.Close ();
-										client.Close ();
-								}
-						}
-				} catch (ThreadAbortException) {
-						print ("exception");
-				}*/
-		miServer = new Server();
-		creado = true;	
+		tcpServer = new Server();
+		creado = true;'
+		string data;
+		string[] clientResponse;
+
+		while (true) {
+			data = tcpServer.receiveData();
+			clientResponse = data.Split(" ");
+			p2VelocityX = clientResponse[0];
+			p2VelocityY = clientResponse[1];
+		}
 	}
 
 	public bool getCreado(){
 		return creado;
 	}
 
-	public void setP1Velocity(float x, float y){
+	public void setP1Velocity(float x, float y) {
 		p1VelocityX = x;
 		p1VelocityY = y;
 	}

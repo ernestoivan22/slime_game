@@ -55,7 +55,7 @@ public class Player1Control : MonoBehaviour {
 
 	void FixedUpdate () {
 		move = Input.GetAxis ("Horizontal");
-		//rigidbody2D.velocity = new Vector2 (move * Speed, rigidbody2D.velocity.y);
+		// 
 		if (PlayerPrefs.GetInt ("esHost") == 1) {
 			if (Input.GetKey (KeyCode.UpArrow)  && CanJump)
 			{

@@ -16,14 +16,14 @@ public class Client {
 		try {
 			clientSocket = new TcpClient ();
 
-			Console.WriteLine ("Connecting.....");
+			Debug.Log ("Connecting.....");
 			clientSocket.Connect (server_adress, 8001);
 			connected = true;
-			Console.WriteLine ("Connected");
+			Debug.Log ("Connected");
 
 			encoder = new ASCIIEncoding();
 		} catch (Exception e) {
-			Console.WriteLine("Error..... " + e.StackTrace);
+			Debug.Log("Error..... " + e.StackTrace);
 		}
 	}
 

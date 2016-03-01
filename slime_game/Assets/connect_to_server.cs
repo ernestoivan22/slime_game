@@ -4,6 +4,7 @@ using System.Collections;
 public class connect_to_server : MonoBehaviour {
 
 	public Texture backgroundTexture;
+	public socketController2 miSocketC;
 	int esHost;
 	public string stringToEdit = "Ingrese IP a conectarse";
 	// Use this for initialization
@@ -13,7 +14,9 @@ public class connect_to_server : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (miSocketC.getConnected()) {
+			Application.LoadLevel(1);
+		}
 	}
 
 	void Awake(){

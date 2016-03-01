@@ -3,6 +3,7 @@ using System.Collections;
 
 public class wait_connection : MonoBehaviour {
 	public Texture backgroundTexture;
+	public socketController1 miSocketC;
 	// Use this for initialization
 	void Start () {
 	
@@ -10,7 +11,9 @@ public class wait_connection : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (miSocketC.getCreado() == true) {
+			Application.LoadLevel(1);
+		}
 	}
 
 	void OnGUI(){

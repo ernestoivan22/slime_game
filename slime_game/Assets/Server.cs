@@ -17,13 +17,22 @@ public class Server {
 	public Server() {
 		try {
 			/* Initializes the Listener */
+			/*IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
+			IPAddress ipAddress = ipHostInfo.AddressList[0];
+			IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+			Socket listener = new Socket(AddressFamily.InterNetwork,
+			                            SocketType.Stream, ProtocolType.Tcp );
+			listener.Bind(localEndPoint);
+			listener.Listen(10);
+			Debug.Log("Waiting for a connection...");
+			Socket handler = listener.Accept();*/
 			serverSocket = new TcpListener(1024);
 			clientSocket = default(TcpClient);
 			/* Start Listeneting at the specified port */        
 
 			serverSocket.Start();
-			Console.WriteLine("The server is running at port 1024...");
-			Console.WriteLine("Waiting for a connection.....");
+			Debug.Log("The server is running at port 1024...");
+			Debug.Log("Waiting for a connection.....");
 
 			clientSocket = serverSocket.AcceptTcpClient();
 			connected = true;
@@ -31,7 +40,7 @@ public class Server {
 			encoder = new ASCIIEncoding();
 		}
 		catch (Exception e) {
-			Console.WriteLine("Error..... " + e.StackTrace);
+			Debug.Log("Error..... " + e.StackTrace);
 		}
 	}
 

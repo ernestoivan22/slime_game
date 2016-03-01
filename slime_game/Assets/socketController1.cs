@@ -39,15 +39,15 @@ public class socketController1 : MonoBehaviour {
 	void threadServer()
 	{
 		tcpServer = new Server();
-		creado = true;'
+		creado = true;
 		string data;
 		string[] clientResponse;
 
 		while (true) {
 			data = tcpServer.receiveData();
-			clientResponse = data.Split(" ");
-			p2VelocityX = clientResponse[0];
-			p2VelocityY = clientResponse[1];
+			clientResponse = data.Split(' ');
+			p2VelocityX = float.Parse(clientResponse[0]);
+			p2VelocityY = float.Parse(clientResponse[1]);
 		}
 	}
 

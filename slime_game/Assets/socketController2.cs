@@ -43,6 +43,7 @@ public class socketController2 : MonoBehaviour {
 		while (true) {
 			data = p2VelocityX + " " + p2VelocityY;
 			response = tcpCliente.sendData(data);
+			print(response);
 		}
 
 	}

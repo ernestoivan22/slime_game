@@ -45,9 +45,13 @@ public class socketController1 : MonoBehaviour {
 
 		while (true) {
 			data = tcpServer.receiveData();
+			print (data);
 			clientResponse = data.Split(' ');
 			p2VelocityX = float.Parse(clientResponse[0]);
 			p2VelocityY = float.Parse(clientResponse[1]);
+			print ("p2VelocityX: " + p2VelocityX);
+			print ("p2VelocityY: " + p2VelocityY);
+
 		}
 	}
 

@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Player2Control : MonoBehaviour {
-
+	public socketController1 socketController_1;
+	public socketController2 socketController_2;
 	public float Speed = 0f;
 	public float MaxJumpTime = 2f;
 	public float JumpForce = 3f;
@@ -14,6 +15,20 @@ public class Player2Control : MonoBehaviour {
 	
 	void Start () {
 		JumpTime  = MaxJumpTime;
+		if (PlayerPrefs.GetInt ("esHost") == 1) {
+			GameObject playerGameObj = GameObject.Find("socketController1");
+			if (playerGameObj != null)
+			{
+				socketController_1 = playerGameObj.GetComponent<socketController1>();
+			}
+		}
+		else{
+			GameObject playerGameObj = GameObject.Find("socketController2");
+			if (playerGameObj != null)
+			{
+				socketController_2 = playerGameObj.GetComponent<socketController2>();
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -47,8 +62,16 @@ public class Player2Control : MonoBehaviour {
 				CanJump = false;
 				JumpTime  = MaxJumpTime;
 			}
+			socketController_2.setP2Velocity (rigidbody2D.velocity.x, rigidbody2D.velocity.x);
+			//print (rigidbody2D.velocity.x + ", " + rigidbody2D.velocity.x);
+			rigidbody2D.velocity = new Vector2 (movex * Speed, movey * Speed);
+		}
+		else{
+			float vX = socketController_1.getP2VelocityX();
+			float vY = socketController_1.getP2VelocityY();
+			rigidbody2D.velocity = new Vector2(vX,vY);
 		}
 		
-		rigidbody2D.velocity = new Vector2 (movex * Speed, movey * Speed);
+
 	}
 }

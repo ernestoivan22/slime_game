@@ -7,6 +7,7 @@ using System.IO;
 public class socketController1 : MonoBehaviour {
 	static bool creado = false;
 	Server miServer;
+	float p1VelocityX,p1VelocityY,p2VelocityX = 0,p2VelocityY = 0;
 
 	private bool mRunning;
 	Thread mThread;
@@ -61,19 +62,24 @@ public class socketController1 : MonoBehaviour {
 				} catch (ThreadAbortException) {
 						print ("exception");
 				}*/
-			//miServer = new Server();
-		for (int i=0; i < 10; i++) {
-			print (i+"\n");		
-		}
-		print ("Fin 1");
+		miServer = new Server();
 		creado = true;	
-		for (int i=0; i < 1000; i++) {
-			print (i+"\n");		
-		}
-		print ("Fin 2");
 	}
 
 	public bool getCreado(){
 		return creado;
+	}
+
+	public void setP1Velocity(float x, float y){
+		p1VelocityX = x;
+		p1VelocityY = y;
+	}
+
+	public float getP2VelocityX(){
+		return p2VelocityX;
+	}
+
+	public float getP2VelocityY(){
+		return p2VelocityY;
 	}
 }

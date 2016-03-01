@@ -7,6 +7,7 @@ public class socketController2 : MonoBehaviour {
 	Thread mThread;
 	bool connected = false;
 	string ipObtenida;
+	float p1VelocityX=0,p1VelocityY=0,p2VelocityX,p2VelocityY;
 	// Use this for initialization
 	void Start () {
 
@@ -42,6 +43,19 @@ public class socketController2 : MonoBehaviour {
 
 	public bool getConnected(){
 		return connected;
+	}
+
+	public void setP2Velocity(float x, float y){
+		p2VelocityX = x;
+		p2VelocityY = y;
+	}
+	
+	public float getP1VelocityX(){
+		return p1VelocityX;
+	}
+	
+	public float getP1VelocityY(){
+		return p1VelocityY;
 	}
 
 }

@@ -62,5 +62,9 @@ public class Client {
 
 		return response;
 	}
+
+	public bool getConnected(){
+		return connected;
+	}
 	
 }

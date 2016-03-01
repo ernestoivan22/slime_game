@@ -11,13 +11,13 @@ public class main_menu : MonoBehaviour {
 		if(GUI.Button(new Rect(Screen.width*0.25f, Screen.height * 0.5f, Screen.width*0.5f, Screen.height*0.1f),"Host Game")){
 			esHost = 1;
 			PlayerPrefs.SetInt("esHost",esHost);
-			Application.LoadLevel("Inicial");
+			Application.LoadLevel(4);
 
 		}
 		if(GUI.Button(new Rect(Screen.width*0.25f, Screen.height * 0.7f, Screen.width*0.5f, Screen.height*0.1f),"Join Game")){
 			esHost = 0;
 			PlayerPrefs.SetInt("esHost",esHost);
-			Application.LoadLevel("Inicial");
+			Application.LoadLevel(3);
 		}
 	}
 

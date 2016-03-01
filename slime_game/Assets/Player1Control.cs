@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Player1Control : MonoBehaviour {
+	public socketController1 socketController;
 	public float Speed = 0f;
 	public float MaxJumpTime = 2f;
 	public float JumpForce = 3f;
@@ -49,5 +50,9 @@ public class Player1Control : MonoBehaviour {
 		}
 
 		rigidbody2D.velocity = new Vector2 (movex * Speed, movey * Speed);
+	}
+
+	void OnLevelWasLoaded(){
+		//socketController = (socketController1)GameObject.Find ("socketController1");
 	}
 }

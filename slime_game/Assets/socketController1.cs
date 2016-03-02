@@ -8,7 +8,7 @@ using System;
 public class socketController1 : MonoBehaviour {
 	static bool creado = false;
 	static Server tcpServer;
-	float p1VelocityX, p1VelocityY, p2VelocityX = 0, p2VelocityY = 0;
+	float p1VelocityX, p1VelocityY, bVelocityX, bVelocityY, p2VelocityX = 0, p2VelocityY = 0;
 
 	private bool mRunning;
 	Thread mThread;
@@ -45,21 +45,23 @@ public class socketController1 : MonoBehaviour {
 	{
 		tcpServer = new Server();
 		creado = true;
-		string data;
+		string data,response;
 		string[] clientResponse;
 
 		while (mRunning) {
 			data = tcpServer.receiveData();
-			Debug.Log (data);
+			//Debug.Log (data);
 			clientResponse = data.Split('|');
 			p2VelocityX = float.Parse(clientResponse[0]);
 			p2VelocityY = float.Parse(clientResponse[1]);
-			Debug.Log  ("p2VelocityX: " + p2VelocityX);
-			Debug.Log ("p2VelocityY: " + p2VelocityY);
-			Debug.Log ("asdfHoli");
+			//Debug.Log  ("p2VelocityX: " + p2VelocityX);
+			//Debug.Log ("p2VelocityY: " + p2VelocityY);
+			//Debug.Log ("asdfHoli");
 			//Thread.Sleep(500);
+			data = p1VelocityX + "|" + p1VelocityY + ";" + bVelocityX + "|" + bVelocityY; 
+			response = tcpServer.sendData(data);
 		}
-
+		tcpServer.closeConnection ();
 		mThread.Abort ();
 	}
 
@@ -70,6 +72,11 @@ public class socketController1 : MonoBehaviour {
 	public void setP1Velocity(float x, float y) {
 		p1VelocityX = x;
 		p1VelocityY = y;
+	}
+
+	public void setBVelocity(float x, float y) {
+		bVelocityX = x;
+		bVelocityY = y;
 	}
 
 	public float getP2VelocityX(){

@@ -7,6 +7,8 @@ public class rebote : MonoBehaviour {
 	private float maxSpeed = 12f;
 	private float vX;
 	private float vY;
+	public socketController1 socketController_1;
+	public socketController2 socketController_2;
 	
 	// Keep track of the direction in which the ball is moving
 	private Vector2 velocity;
@@ -17,6 +19,20 @@ public class rebote : MonoBehaviour {
 	void Start () {
 		// Random direction
 		rigidbody2D.velocity = new Vector2(0,0) * speed;
+		if (PlayerPrefs.GetInt ("esHost") == 1) {
+			GameObject playerGameObj = GameObject.Find("socketController1");
+			if (playerGameObj != null)
+			{
+				socketController_1 = playerGameObj.GetComponent<socketController1>();
+			}
+		}
+		else{
+			GameObject playerGameObj = GameObject.Find("socketController2");
+			if (playerGameObj != null)
+			{
+				socketController_2 = playerGameObj.GetComponent<socketController2>();
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -26,45 +42,58 @@ public class rebote : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		// Get pos 2d of the ball.
-		Vector3 pos3D = transform.position;
-		Vector2 pos2D = new Vector2(pos3D.x, pos3D.y);
-		
-		// Velocity calculation. Will be used for the bounce
-		velocity = pos2D - lastPos;
-		vX = rigidbody2D.velocity.x;
-		vY = rigidbody2D.velocity.y;
-		if (vY > maxSpeed) {
-			vY = maxSpeed;
-			rigidbody2D.velocity = new Vector2(vX, vY);
+		if (PlayerPrefs.GetInt ("esHost") == 1) {
+			// Get pos 2d of the ball.
+			Vector3 pos3D = transform.position;
+			Vector2 pos2D = new Vector2(pos3D.x, pos3D.y);
+			
+			// Velocity calculation. Will be used for the bounce
+			velocity = pos2D - lastPos;
+			vX = rigidbody2D.velocity.x;
+			vY = rigidbody2D.velocity.y;
+			if (vY > maxSpeed) {
+				vY = maxSpeed;
+				rigidbody2D.velocity = new Vector2(vX, vY);
+			}
+			if (vX > maxSpeed) {
+				vX = maxSpeed;
+				rigidbody2D.velocity = new Vector2(vX, vY);
+			}
+			lastPos = pos2D;
+			socketController_1.setBVelocity (rigidbody2D.velocity.x, rigidbody2D.velocity.y);
 		}
-		if (vX > maxSpeed) {
-			vX = maxSpeed;
-			rigidbody2D.velocity = new Vector2(vX, vY);
+		else{
+			float vX = socketController_2.getBVelocityX();
+			float vY = socketController_2.getBVelocityY();
+			rigidbody2D.velocity = new Vector2(vX,vY);
 		}
-		lastPos = pos2D;
+
 	}
 	
 	private void OnCollisionEnter2D(Collision2D col)
 	{
-		// Normal
-		Vector3 N = col.contacts[0].normal;
-		//Direction
-		Vector3 V = velocity.normalized;
-		
-		// Reflection
-		Vector3 R = Vector3.Reflect(V, N).normalized*2;
-		
-		// Assign normalized reflection with the constant speed
-		vX = R.x;
-		vY = R.y;
-		if (vX > maxSpeed) {
-			vX = maxSpeed;
+		if (PlayerPrefs.GetInt ("esHost") == 1) {
+			// Normal
+			Vector3 N = col.contacts[0].normal;
+			//Direction
+			Vector3 V = velocity.normalized;
+			
+			// Reflection
+			Vector3 R = Vector3.Reflect(V, N).normalized*2;
+			
+			// Assign normalized reflection with the constant speed
+			vX = R.x;
+			vY = R.y;
+			if (vX > maxSpeed) {
+				vX = maxSpeed;
+			}
+			if (vY > maxSpeed) {
+				vY = maxSpeed;
+			}
+			rigidbody2D.velocity = new Vector2(vX, vY) * speed;
+			socketController_1.setBVelocity (rigidbody2D.velocity.x, rigidbody2D.velocity.y);
+			//rigidbody2D.AddForce
 		}
-		if (vY > maxSpeed) {
-			vY = maxSpeed;
-		}
-		rigidbody2D.velocity = new Vector2(vX, vY) * speed;
-		//rigidbody2D.AddForce
+
 	}
 }

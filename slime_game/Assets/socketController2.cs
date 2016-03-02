@@ -8,7 +8,7 @@ public class socketController2 : MonoBehaviour {
 	bool connected = false;
 	string ipObtenida;
 	bool running;
-	float p1VelocityX = 0, p1VelocityY = 0, p2VelocityX ,p2VelocityY;
+	float p1VelocityX = 0, p1VelocityY = 0, bVelocityX = 0, bVelocityY = 0, p2VelocityX ,p2VelocityY;
 
 	// Use this for initialization
 	void Start () {
@@ -47,11 +47,21 @@ public class socketController2 : MonoBehaviour {
 			mThread.Abort();
 		}
 		string data, response;
+		string[] separacion, vJugador, vPelota;
 		while (running) {
 			data = p2VelocityX + "|" + p2VelocityY;
 			response = tcpCliente.sendData(data);
-			Debug.Log (response);
-			Thread.Sleep(200);
+			//Debug.Log (response);
+			//Thread.Sleep(200);
+			data = tcpCliente.receiveData();
+			//Debug.Log (data);
+			separacion = data.Split(';');
+			vJugador = separacion[0].Split('|');
+			vPelota = separacion[1].Split('|');
+			p1VelocityX = float.Parse(vJugador[0]);
+			p1VelocityY = float.Parse(vJugador[1]);
+			bVelocityX = float.Parse(vPelota[0]);
+			bVelocityY = float.Parse(vPelota[1]);
 		}
 
 	}
@@ -71,6 +81,14 @@ public class socketController2 : MonoBehaviour {
 	
 	public float getP1VelocityY(){
 		return p1VelocityY;
+	}
+
+	public float getBVelocityX(){
+		return bVelocityX;
+	}
+	
+	public float getBVelocityY(){
+		return bVelocityY;
 	}
 
 }

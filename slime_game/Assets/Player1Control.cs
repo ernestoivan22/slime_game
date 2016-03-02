@@ -70,8 +70,11 @@ public class Player1Control : MonoBehaviour {
 		else{
 			float vX = socketController_2.getP1VelocityX();
 			float vY = socketController_2.getP1VelocityY();
+			float pX = socketController_2.getP1PositionX();
+			float pY = socketController_2.getP1PositionY();
+
 			rigidbody2D.velocity = new Vector2(vX,vY);
-							
+			rigidbody2D.transform.position = new Vector3(pX, pY, 0);
 		}
 
 	}

@@ -8,7 +8,8 @@ public class socketController2 : MonoBehaviour {
 	bool connected = false;
 	string ipObtenida;
 	bool running;
-	float p1VelocityX = 0, p1VelocityY = 0, bVelocityX = 0, bVelocityY = 0, p2VelocityX ,p2VelocityY;
+	float p1VelocityX = 0, p1VelocityY = 0, bVelocityX = 0, bVelocityY = 0, p2VelocityX, p2VelocityY;
+	float p1PositionX = -2, p1PositionY = -2, bPositionX = -2, bPositionY = 0, p2PositionX, p2PositionY;
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +50,7 @@ public class socketController2 : MonoBehaviour {
 		string data, response;
 		string[] separacion, vJugador, vPelota;
 		while (running) {
-			data = p2VelocityX + "|" + p2VelocityY;
+			data = p2VelocityX + "|" + p2VelocityY + "|" + p2PositionX + "|" + p2PositionY;
 			response = tcpCliente.sendData(data);
 			//Debug.Log (response);
 			//Thread.Sleep(200);
@@ -58,10 +59,16 @@ public class socketController2 : MonoBehaviour {
 			separacion = data.Split(';');
 			vJugador = separacion[0].Split('|');
 			vPelota = separacion[1].Split('|');
+
 			p1VelocityX = float.Parse(vJugador[0]);
 			p1VelocityY = float.Parse(vJugador[1]);
+			p1PositionX = float.Parse(vJugador[2]);
+			p1PositionY = float.Parse(vJugador[3]);
+
 			bVelocityX = float.Parse(vPelota[0]);
 			bVelocityY = float.Parse(vPelota[1]);
+			bPositionX = float.Parse(vPelota[2]);
+			bPositionY = float.Parse(vPelota[3]);
 		}
 
 	}
@@ -83,6 +90,16 @@ public class socketController2 : MonoBehaviour {
 		return p1VelocityY;
 	}
 
+	public float getP1PositionX(){
+		return p1PositionX;
+	}
+	
+	public float getP1PositionY(){
+		return p1PositionY;
+	}
+
+
+
 	public float getBVelocityX(){
 		return bVelocityX;
 	}
@@ -91,4 +108,11 @@ public class socketController2 : MonoBehaviour {
 		return bVelocityY;
 	}
 
+	public float getBPositionX(){
+		return bPositionX;
+	}
+	
+	public float getBPositionY(){
+		return bPositionY;
+	}
 }

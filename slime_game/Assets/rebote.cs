@@ -65,7 +65,11 @@ public class rebote : MonoBehaviour {
 		else{
 			float vX = socketController_2.getBVelocityX();
 			float vY = socketController_2.getBVelocityY();
+			float pX = socketController_2.getBPositionX();
+			float pY = socketController_2.getBPositionY();
+
 			rigidbody2D.velocity = new Vector2(vX,vY);
+			rigidbody2D.transform.position = new Vector3(pX, pY, 0);
 		}
 
 	}

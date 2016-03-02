@@ -9,6 +9,7 @@ public class socketController1 : MonoBehaviour {
 	static bool creado = false;
 	static Server tcpServer;
 	float p1VelocityX, p1VelocityY, bVelocityX, bVelocityY, p2VelocityX = 0, p2VelocityY = 0;
+	float p1PositionX, p1PositionY, bPositionX, bPositionY, p2PositionX = 2, p2PositionY = -2;
 
 	private bool mRunning;
 	Thread mThread;
@@ -54,11 +55,14 @@ public class socketController1 : MonoBehaviour {
 			clientResponse = data.Split('|');
 			p2VelocityX = float.Parse(clientResponse[0]);
 			p2VelocityY = float.Parse(clientResponse[1]);
+			p2PositionX = float.Parse(clientResponse[2]);
+			p2PositionY = float.Parse(clientResponse[3]);
 			//Debug.Log  ("p2VelocityX: " + p2VelocityX);
 			//Debug.Log ("p2VelocityY: " + p2VelocityY);
 			//Debug.Log ("asdfHoli");
 			//Thread.Sleep(500);
-			data = p1VelocityX + "|" + p1VelocityY + ";" + bVelocityX + "|" + bVelocityY; 
+			data = p1VelocityX + "|" + p1VelocityY + "|" + p1PositionX + "|" + p1PositionY + ";"
+				+ bVelocityX + "|" + bVelocityY + "|" + bPositionX + "|" + bPositionY; 
 			response = tcpServer.sendData(data);
 		}
 		tcpServer.closeConnection ();
@@ -86,4 +90,13 @@ public class socketController1 : MonoBehaviour {
 	public float getP2VelocityY(){
 		return p2VelocityY;
 	}
+
+	public float getP2PositionX() {
+		return p2PositionX;
+	}
+
+	public float getP2PositionY() {
+		return p2PositionY;
+	}
+
 }

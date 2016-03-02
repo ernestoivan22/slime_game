@@ -69,7 +69,11 @@ public class Player2Control : MonoBehaviour {
 		else{
 			float vX = socketController_1.getP2VelocityX();
 			float vY = socketController_1.getP2VelocityY();
+			float pX = socketController_1.getP2PositionX();
+			float pY = socketController_1.getP2PositionY();
+
 			rigidbody2D.velocity = new Vector2(vX,vY);
+			rigidbody2D.transform.position = new Vector3(pX, pY, 0);
 		}
 		
 

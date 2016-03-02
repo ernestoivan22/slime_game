@@ -3,10 +3,10 @@ using System.Collections;
 
 public class posicion_inicio : MonoBehaviour {
 	public gameManager gManager;
-	float posX1 = (float)-2.413441;
-	float posY1 = (float)-0.3412947;
-	float posX2 = (float)2.213441;
-	float posY2 = (float)0.3412947;
+	float posX1 = -2.0;
+	float posY1 = 0;
+	float posX2 = 2.0;
+	float posY2 = 0;
 
 	// Use this for initialization
 	void Start () {

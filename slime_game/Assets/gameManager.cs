@@ -25,7 +25,7 @@ public class gameManager : MonoBehaviour {
 				p1Scored = false;
 				p1Won = 1;
 				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(50);
+					System.Threading.Thread.Sleep(60);
 				}
 				PlayerPrefs.SetInt("p1Won",p1Won);
 				Application.LoadLevel (2);
@@ -33,7 +33,7 @@ public class gameManager : MonoBehaviour {
 			else{
 				p1Scored = true;
 				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(50);
+					System.Threading.Thread.Sleep(60);
 				}
 				Application.LoadLevel(1);
 			}
@@ -47,7 +47,7 @@ public class gameManager : MonoBehaviour {
 				p1Scored = false;
 				p1Won = 0;
 				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(50);
+					System.Threading.Thread.Sleep(60);
 				}
 				PlayerPrefs.SetInt("p1Won",p1Won);
 				Application.LoadLevel(2);
@@ -55,7 +55,7 @@ public class gameManager : MonoBehaviour {
 			else{
 				p1Scored = false;
 				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(50);
+					System.Threading.Thread.Sleep(60);
 				}
 				Application.LoadLevel(1);
 			}

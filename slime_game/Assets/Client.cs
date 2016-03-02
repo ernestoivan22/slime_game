@@ -28,39 +28,51 @@ public class Client {
 	}
 
 	public String sendData(String data) {
-		serverStream = clientSocket.GetStream();
+		try{
+			serverStream = clientSocket.GetStream();
+			
+			byte[] outStream = encoder.GetBytes(data + "$");;
+			Debug.Log("Transmitting.....");
+			serverStream.Write(outStream, 0, outStream.Length);
+			serverStream.Flush();
+			
+			// Respuesta del servidor
+			byte[] inStream = new byte[1024];
+			serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+			String response = encoder.GetString (inStream);
+			Console.WriteLine("Server response: " + response);
+			
+			return response;
+		}catch (Exception e) {
+			Debug.Log("Error..... " + e.StackTrace);
+			return ("Error..... " + e.StackTrace);
+		}
 
-		byte[] outStream = encoder.GetBytes(data + "$");;
-		Console.WriteLine("Transmitting.....");
-		serverStream.Write(outStream, 0, outStream.Length);
-		serverStream.Flush();
-
-		// Respuesta del servidor
-		byte[] inStream = new byte[1024];
-		serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
-		String response = encoder.GetString (inStream);
-		Console.WriteLine("Server response: " + response);
-
-		return response;
 	}
 
 
 	public String receiveData() {
-		// Respuesta del servidor
-		byte[] inStream = new byte[1024];
-		serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
-		String response = encoder.GetString (inStream);
-		response = response.Substring(0, response.IndexOf("$"));
+		try{
+			// Respuesta del servidor
+			byte[] inStream = new byte[1024];
+			serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+			String response = encoder.GetString (inStream);
+			response = response.Substring(0, response.IndexOf("$"));
+			
+			Console.WriteLine("Server response: " + response);
+			
+			// Ack
+			serverStream = clientSocket.GetStream();
+			byte[] outStream = encoder.GetBytes("ok$");;
+			serverStream.Write(outStream, 0, outStream.Length);
+			serverStream.Flush();
+			
+			return response;
+		}catch (Exception e) {
+			Debug.Log("Error..... " + e.StackTrace);
+			return ("Error..... " + e.StackTrace);
+		}
 
-		Console.WriteLine("Server response: " + response);
-
-		// Ack
-		serverStream = clientSocket.GetStream();
-		byte[] outStream = encoder.GetBytes("ok$");;
-		serverStream.Write(outStream, 0, outStream.Length);
-		serverStream.Flush();
-
-		return response;
 	}
 
 	public bool getConnected(){

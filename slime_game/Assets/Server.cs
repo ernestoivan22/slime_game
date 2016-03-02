@@ -45,33 +45,45 @@ public class Server {
 	}
 
 	public String receiveData() {
-		networkStream = clientSocket.GetStream();
-		byte[] bytesFrom = new byte[1024];
-		networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
-		String dataFromClient = encoder.GetString (bytesFrom);
-		dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+		try{
+			networkStream = clientSocket.GetStream();
+			byte[] bytesFrom = new byte[1024];
+			networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
+			String dataFromClient = encoder.GetString (bytesFrom);
+			dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
-		Console.WriteLine("Client request: " + dataFromClient);
+			Console.WriteLine("Client request: " + dataFromClient);
 
-		Byte[] sendBytes = encoder.GetBytes("ok$");
-		networkStream.Write(sendBytes, 0, sendBytes.Length);
-		networkStream.Flush();
+			Byte[] sendBytes = encoder.GetBytes("ok$");
+			networkStream.Write(sendBytes, 0, sendBytes.Length);
+			networkStream.Flush();
 
-		return dataFromClient;
+			return dataFromClient;
+		}catch (Exception e) {
+			Debug.Log("Error..... " + e.StackTrace);
+			return("Error..... " + e.StackTrace);
+		}
+
 	}
 
 	public String sendData(String data) {
-		Byte[] sendBytes = encoder.GetBytes(data);
-		networkStream.Write(sendBytes, 0, sendBytes.Length);
-		networkStream.Flush();
+		try{
+			Byte[] sendBytes = encoder.GetBytes(data);
+			networkStream.Write(sendBytes, 0, sendBytes.Length);
+			networkStream.Flush();
+			
+			// Respuesta del servidor
+			byte[] inStream = new byte[1024];
+			networkStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+			String response = encoder.GetString (inStream);
+			Console.WriteLine("Client response: " + response);
+			
+			return response;
+		}catch (Exception e) {
+			Debug.Log("Error..... " + e.StackTrace);
+			return("Error..... " + e.StackTrace);
+		}
 
-		// Respuesta del servidor
-		byte[] inStream = new byte[1024];
-		networkStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
-		String response = encoder.GetString (inStream);
-		Console.WriteLine("Client response: " + response);
-
-		return response;
 	}
 
 	public void closeConnection() {

@@ -51,6 +51,7 @@ public class socketController1 : MonoBehaviour {
 			p2VelocityY = float.Parse(clientResponse[1]);
 			Debug.Log  ("p2VelocityX: " + p2VelocityX);
 			Debug.Log ("p2VelocityY: " + p2VelocityY);
+			Debug.Log ("asdfHoli");
 
 		}
 	}

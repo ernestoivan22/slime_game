@@ -7,6 +7,7 @@ public class rebote : MonoBehaviour {
 	private float maxSpeed = 12f;
 	private float vX;
 	private float vY;
+	int frames = 0;
 	public socketController1 socketController_1;
 	public socketController2 socketController_2;
 	
@@ -63,14 +64,39 @@ public class rebote : MonoBehaviour {
 			socketController_1.setBVelocity(rigidbody2D.velocity.x, rigidbody2D.velocity.y);
 			socketController_1.setBPosition(rigidbody2D.transform.position.x, rigidbody2D.transform.position.y);
 		}
-		else{
-			float vX = socketController_2.getBVelocityX();
-			float vY = socketController_2.getBVelocityY();
-			float pX = socketController_2.getBPositionX();
-			float pY = socketController_2.getBPositionY();
+		else {
+			if (frames < 500) {
+				// Get pos 2d of the ball.
+				Vector3 pos3D = transform.position;
+				Vector2 pos2D = new Vector2(pos3D.x, pos3D.y);
+				
+				// Velocity calculation. Will be used for the bounce
+				velocity = pos2D - lastPos;
+				vX = rigidbody2D.velocity.x;
+				vY = rigidbody2D.velocity.y;
+				if (vY > maxSpeed) {
+					vY = maxSpeed;
+					rigidbody2D.velocity = new Vector2(vX, vY);
+				}
+				if (vX > maxSpeed) {
+					vX = maxSpeed;
+					rigidbody2D.velocity = new Vector2(vX, vY);
+				}
+				lastPos = pos2D;
 
-			rigidbody2D.velocity = new Vector2(vX,vY);
-			rigidbody2D.transform.position = new Vector3(pX, pY, 0);
+				frames++;
+			}
+			else {
+				float vX = socketController_2.getBVelocityX();
+				float vY = socketController_2.getBVelocityY();
+				float pX = socketController_2.getBPositionX();
+				float pY = socketController_2.getBPositionY();
+				
+				rigidbody2D.velocity = new Vector2(vX,vY);
+				rigidbody2D.transform.position = new Vector3(pX, pY, 0);
+
+				frames = 0;
+			}
 		}
 
 	}

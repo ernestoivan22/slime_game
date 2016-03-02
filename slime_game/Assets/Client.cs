@@ -57,9 +57,8 @@ public class Client {
 		try{
 			// Respuesta del servidor
 			byte[] inStream = new byte[1024];
-			serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
+			serverStream.Read(inStream, 0, inStream.Length);
 			String response = encoder.GetString (inStream);
-			response = response.Substring(0, response.IndexOf("$"));
 			
 			Console.WriteLine("Server response: " + response);
 			

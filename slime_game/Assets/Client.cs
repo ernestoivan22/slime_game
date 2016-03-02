@@ -30,9 +30,9 @@ public class Client {
 	public String sendData(String data) {
 		try{
 			serverStream = clientSocket.GetStream();
-			
-			byte[] outStream = encoder.GetBytes(data + "$");;
-			Debug.Log("Transmitting.....");
+			Debug.Log("Transmitting: " + data);
+			byte[] outStream = encoder.GetBytes(data);;
+
 			serverStream.Write(outStream, 0, outStream.Length);
 			serverStream.Flush();
 			

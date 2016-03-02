@@ -48,9 +48,8 @@ public class Server {
 		try{
 			networkStream = clientSocket.GetStream();
 			byte[] bytesFrom = new byte[1024];
-			networkStream.Read(bytesFrom, 0, (int)clientSocket.ReceiveBufferSize);
+			networkStream.Read(bytesFrom, 0, bytesFrom.Length);
 			String dataFromClient = encoder.GetString (bytesFrom);
-			dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
 			Console.WriteLine("Client request: " + dataFromClient);
 

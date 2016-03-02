@@ -37,12 +37,14 @@ public class Client {
 			serverStream.Flush();
 			
 			// Respuesta del servidor
+			/**
 			byte[] inStream = new byte[1024];
 			serverStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
 			String response = encoder.GetString (inStream);
 			Console.WriteLine("Server response: " + response);
+			**/
 			
-			return response;
+			return "";
 		}catch (Exception e) {
 			Debug.Log("Error..... " + e.StackTrace);
 			return ("Error..... " + e.StackTrace);
@@ -62,11 +64,12 @@ public class Client {
 			Console.WriteLine("Server response: " + response);
 			
 			// Ack
+			/**
 			serverStream = clientSocket.GetStream();
 			byte[] outStream = encoder.GetBytes("ok$");;
 			serverStream.Write(outStream, 0, outStream.Length);
 			serverStream.Flush();
-			
+			**/
 			return response;
 		}catch (Exception e) {
 			Debug.Log("Error..... " + e.StackTrace);

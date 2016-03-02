@@ -54,9 +54,11 @@ public class Server {
 
 			Console.WriteLine("Client request: " + dataFromClient);
 
+			/**
 			Byte[] sendBytes = encoder.GetBytes("ok$");
 			networkStream.Write(sendBytes, 0, sendBytes.Length);
 			networkStream.Flush();
+			**/
 
 			return dataFromClient;
 		}catch (Exception e) {
@@ -73,12 +75,13 @@ public class Server {
 			networkStream.Flush();
 			
 			// Respuesta del servidor
+			/**
 			byte[] inStream = new byte[1024];
 			networkStream.Read(inStream, 0, (int)clientSocket.ReceiveBufferSize);
 			String response = encoder.GetString (inStream);
 			Console.WriteLine("Client response: " + response);
-			
-			return response;
+			**/
+			return "";
 		}catch (Exception e) {
 			Debug.Log("Error..... " + e.StackTrace);
 			return("Error..... " + e.StackTrace);

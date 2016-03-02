@@ -57,7 +57,7 @@ public class socketController1 : MonoBehaviour {
 			Debug.Log  ("p2VelocityX: " + p2VelocityX);
 			Debug.Log ("p2VelocityY: " + p2VelocityY);
 			Debug.Log ("asdfHoli");
-			Thread.Sleep(500);
+			//Thread.Sleep(500);
 		}
 
 		mThread.Abort ();

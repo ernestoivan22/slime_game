@@ -103,7 +103,6 @@ public class rebote : MonoBehaviour {
 	
 	private void OnCollisionEnter2D(Collision2D col)
 	{
-		//if (PlayerPrefs.GetInt ("esHost") == 1) {
 			// Normal
 			Vector3 N = col.contacts[0].normal;
 			//Direction
@@ -122,9 +121,10 @@ public class rebote : MonoBehaviour {
 				vY = maxSpeed;
 			}
 			rigidbody2D.velocity = new Vector2(vX, vY) * speed;
+		if (PlayerPrefs.GetInt ("esHost") == 1) {
 			socketController_1.setBVelocity (rigidbody2D.velocity.x, rigidbody2D.velocity.y);
 			//rigidbody2D.AddForce
-		//}
+		}
 
 	}
 }

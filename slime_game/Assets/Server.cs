@@ -51,7 +51,7 @@ public class Server {
 			networkStream.Read(bytesFrom, 0, bytesFrom.Length);
 			String dataFromClient = encoder.GetString (bytesFrom);
 
-			Console.WriteLine("Client request: " + dataFromClient);
+			//Console.WriteLine("Client request: " + dataFromClient);
 
 			/**
 			Byte[] sendBytes = encoder.GetBytes("ok$");

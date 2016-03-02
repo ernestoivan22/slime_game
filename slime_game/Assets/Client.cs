@@ -30,7 +30,7 @@ public class Client {
 	public String sendData(String data) {
 		try{
 			serverStream = clientSocket.GetStream();
-			Debug.Log("Transmitting: " + data);
+			//Debug.Log("Transmitting: " + data);
 			byte[] outStream = encoder.GetBytes(data);;
 
 			serverStream.Write(outStream, 0, outStream.Length);
@@ -60,7 +60,7 @@ public class Client {
 			serverStream.Read(inStream, 0, inStream.Length);
 			String response = encoder.GetString (inStream);
 			
-			Console.WriteLine("Server response: " + response);
+			//Console.WriteLine("Server response: " + response);
 			
 			// Ack
 			/**

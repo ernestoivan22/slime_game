@@ -65,7 +65,7 @@ public class rebote : MonoBehaviour {
 			socketController_1.setBPosition(rigidbody2D.transform.position.x, rigidbody2D.transform.position.y);
 		}
 		else {
-			if (frames < 500) {
+			if (frames < 20) {
 				// Get pos 2d of the ball.
 				Vector3 pos3D = transform.position;
 				Vector2 pos2D = new Vector2(pos3D.x, pos3D.y);
@@ -103,7 +103,7 @@ public class rebote : MonoBehaviour {
 	
 	private void OnCollisionEnter2D(Collision2D col)
 	{
-		if (PlayerPrefs.GetInt ("esHost") == 1) {
+		//if (PlayerPrefs.GetInt ("esHost") == 1) {
 			// Normal
 			Vector3 N = col.contacts[0].normal;
 			//Direction
@@ -124,7 +124,7 @@ public class rebote : MonoBehaviour {
 			rigidbody2D.velocity = new Vector2(vX, vY) * speed;
 			socketController_1.setBVelocity (rigidbody2D.velocity.x, rigidbody2D.velocity.y);
 			//rigidbody2D.AddForce
-		}
+		//}
 
 	}
 }

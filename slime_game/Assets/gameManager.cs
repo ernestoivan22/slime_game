@@ -24,17 +24,14 @@ public class gameManager : MonoBehaviour {
 				p2Score = 0;
 				p1Scored = false;
 				p1Won = 1;
-				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(60);
-				}
+				//if (PlayerPrefs.GetInt ("esHost") == 1) {
+				//	System.Threading.Thread.Sleep(60);
+				//}
 				PlayerPrefs.SetInt("p1Won",p1Won);
 				Application.LoadLevel (2);
 			}
 			else{
 				p1Scored = true;
-				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(60);
-				}
 				Application.LoadLevel(1);
 			}
 		}
@@ -46,17 +43,11 @@ public class gameManager : MonoBehaviour {
 				p2Score = 0;
 				p1Scored = false;
 				p1Won = 0;
-				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(60);
-				}
 				PlayerPrefs.SetInt("p1Won",p1Won);
 				Application.LoadLevel(2);
 			}
 			else{
 				p1Scored = false;
-				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(60);
-				}
 				Application.LoadLevel(1);
 			}
 

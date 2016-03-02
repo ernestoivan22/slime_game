@@ -48,10 +48,10 @@ public class socketController2 : MonoBehaviour {
 		}
 		string data, response;
 		while (running) {
-			data = p2VelocityX + " " + p2VelocityY;
+			data = p2VelocityX + "|" + p2VelocityY;
 			response = tcpCliente.sendData(data);
 			Debug.Log (response);
-			//Thread.Sleep(500);
+			Thread.Sleep(150);
 		}
 
 	}

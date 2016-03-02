@@ -62,7 +62,7 @@ public class Player2Control : MonoBehaviour {
 				CanJump = false;
 				JumpTime  = MaxJumpTime;
 			}
-			socketController_2.setP2Velocity (rigidbody2D.velocity.x, rigidbody2D.velocity.x);
+			socketController_2.setP2Velocity (rigidbody2D.velocity.x, rigidbody2D.velocity.y);
 			//print (rigidbody2D.velocity.x + ", " + rigidbody2D.velocity.x);
 			rigidbody2D.velocity = new Vector2 (movex * Speed, movey * Speed);
 		}

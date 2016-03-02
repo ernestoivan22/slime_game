@@ -51,7 +51,7 @@ public class socketController2 : MonoBehaviour {
 			data = p2VelocityX + "|" + p2VelocityY;
 			response = tcpCliente.sendData(data);
 			Debug.Log (response);
-			Thread.Sleep(150);
+			Thread.Sleep(200);
 		}
 
 	}

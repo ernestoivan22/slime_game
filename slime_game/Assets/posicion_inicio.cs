@@ -3,9 +3,9 @@ using System.Collections;
 
 public class posicion_inicio : MonoBehaviour {
 	public gameManager gManager;
-	float posX1 = -2.0;
+	float posX1 = -2;
 	float posY1 = 0;
-	float posX2 = 2.0;
+	float posX2 = 2;
 	float posY2 = 0;
 
 	// Use this for initialization

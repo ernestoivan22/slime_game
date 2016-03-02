@@ -24,7 +24,7 @@ public class Score : MonoBehaviour {
 		ContactPoint2D[] contacto = collision.contacts;
 		Vector2 puntos = contacto[0].point;
 		if(collision.gameObject.name == "ball"){
-			if(puntos.x<0){
+			if(puntos.x < 0){
 				gManager.AddScore(1);
 			}
 			else{

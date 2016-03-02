@@ -23,13 +23,18 @@ public class gameManager : MonoBehaviour {
 				p2Score = 0;
 				p1Scored = false;
 				p1Won = 1;
+				if (PlayerPrefs.GetInt ("esHost") == 1) {
+					System.Threading.Thread.Sleep(100);
+				}
 				PlayerPrefs.SetInt("p1Won",p1Won);
 				Application.LoadLevel (2);
 			}
 			else{
 				p1Scored = true;
+				if (PlayerPrefs.GetInt ("esHost") == 1) {
+					System.Threading.Thread.Sleep(100);
+				}
 				Application.LoadLevel(1);
-
 			}
 		}
 		else{
@@ -39,11 +44,17 @@ public class gameManager : MonoBehaviour {
 				p2Score = 0;
 				p1Scored = false;
 				p1Won = 0;
+				if (PlayerPrefs.GetInt ("esHost") == 1) {
+					System.Threading.Thread.Sleep(100);
+				}
 				PlayerPrefs.SetInt("p1Won",p1Won);
 				Application.LoadLevel(2);
 			}
 			else{
 				p1Scored = false;
+				if (PlayerPrefs.GetInt ("esHost") == 1) {
+					System.Threading.Thread.Sleep(100);
+				}
 				Application.LoadLevel(1);
 			}
 

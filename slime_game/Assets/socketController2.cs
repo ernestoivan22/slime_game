@@ -7,6 +7,7 @@ public class socketController2 : MonoBehaviour {
 	Thread mThread;
 	bool connected = false;
 	string ipObtenida;
+	bool running;
 	float p1VelocityX = 0, p1VelocityY = 0, p2VelocityX ,p2VelocityY;
 
 	// Use this for initialization
@@ -21,10 +22,16 @@ public class socketController2 : MonoBehaviour {
 			ipObtenida = PlayerPrefs.GetString("ipObtenido");
 			ThreadStart ts = new ThreadStart(threadCliente);
 			mThread = new Thread(ts);
+			running = true;
 			mThread.Start();
 			print("Thread done...");
 
 		}
+	}
+
+	void OnApplicationQuit() {
+		Debug.Log("Application exit");
+		running = false;
 	}
 
 	void Awake(){
@@ -40,10 +47,11 @@ public class socketController2 : MonoBehaviour {
 			mThread.Abort();
 		}
 		string data, response;
-		while (true) {
+		while (running) {
 			data = p2VelocityX + " " + p2VelocityY;
 			response = tcpCliente.sendData(data);
 			Debug.Log (response);
+			Thread.Sleep(500);
 		}
 
 	}

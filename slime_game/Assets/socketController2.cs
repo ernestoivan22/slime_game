@@ -81,6 +81,11 @@ public class socketController2 : MonoBehaviour {
 		p2VelocityX = x;
 		p2VelocityY = y;
 	}
+
+	public void setP2Position(float x, float y) {
+		p2PositionX = x;
+		p2PositionY = y;
+	}
 	
 	public float getP1VelocityX(){
 		return p1VelocityX;

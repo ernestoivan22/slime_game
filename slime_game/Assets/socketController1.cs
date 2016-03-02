@@ -26,7 +26,12 @@ public class socketController1 : MonoBehaviour {
 			print("Thread done...");
 		}
 	}
-	
+
+	void OnApplicationQuit() {
+		Debug.Log("Application exit");
+		mRunning = false;
+	}
+
 	// Update is called once per frame
 	void Update () {
 
@@ -43,7 +48,7 @@ public class socketController1 : MonoBehaviour {
 		string data;
 		string[] clientResponse;
 
-		while (true) {
+		while (mRunning) {
 			data = tcpServer.receiveData();
 			Debug.Log (data);
 			clientResponse = data.Split(' ');
@@ -52,8 +57,10 @@ public class socketController1 : MonoBehaviour {
 			Debug.Log  ("p2VelocityX: " + p2VelocityX);
 			Debug.Log ("p2VelocityY: " + p2VelocityY);
 			Debug.Log ("asdfHoli");
-
+			Thread.Sleep(500);
 		}
+
+		mThread.Abort ();
 	}
 
 	public bool getCreado(){

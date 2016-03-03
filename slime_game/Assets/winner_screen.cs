@@ -7,17 +7,14 @@ public class winner_screen : MonoBehaviour {
 
 	void OnGUI(){
 		if (PlayerPrefs.GetInt ("p1Won") == 1) {
-			GUI.DrawTexture (new Rect(0,0,Screen.width,Screen.height),backgroundTexture1);
+			GUI.DrawTexture (new Rect(0, 0, Screen.width, Screen.height), backgroundTexture1);
 		}
 		else{
-			GUI.DrawTexture (new Rect(0,0,Screen.width,Screen.height),backgroundTexture2);
+			GUI.DrawTexture (new Rect(0, 0, Screen.width, Screen.height), backgroundTexture2);
 		}
 		//botones
-		if(GUI.Button(new Rect(Screen.width*0.25f, Screen.height * 0.5f, Screen.width*0.5f, Screen.height*0.1f),"Aceptar")){
+		if(GUI.Button(new Rect(Screen.width*0.25f, Screen.height * 0.5f, Screen.width*0.5f, Screen.height*0.1f), "Aceptar")){
 			Application.LoadLevel(0);
-			
 		}
 	}
-
-
 }

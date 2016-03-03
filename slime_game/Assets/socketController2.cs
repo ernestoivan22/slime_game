@@ -35,6 +35,16 @@ public class socketController2 : MonoBehaviour {
 		running = false;
 	}
 
+	void OnDestroy() {
+		Debug.Log("Socket controller 1 destroyed");
+		running = false;
+	}
+
+	void OnDisable() {
+		Debug.Log("Socket controller 1 destroyed");
+		running = false;
+	}
+
 	void Awake(){
 		DontDestroyOnLoad (transform.gameObject);
 	}
@@ -47,30 +57,32 @@ public class socketController2 : MonoBehaviour {
 			print ("Fallido");
 			mThread.Abort();
 		}
-		string data, response;
-		string[] separacion, vJugador, vPelota;
+		string data;
+		string[] separacion, jugadorServer, pelota;
 		while (running) {
 			data = p2VelocityX + "|" + p2VelocityY + "|" + p2PositionX + "|" + p2PositionY;
-			response = tcpCliente.sendData(data);
+			tcpCliente.sendData(data);
 			//Debug.Log (response);
 			//Thread.Sleep(200);
 			data = tcpCliente.receiveData();
 			//Debug.Log (data);
 			separacion = data.Split(';');
-			vJugador = separacion[0].Split('|');
-			vPelota = separacion[1].Split('|');
+			jugadorServer = separacion[0].Split('|');
+			pelota = separacion[1].Split('|');
 
-			p1VelocityX = float.Parse(vJugador[0]);
-			p1VelocityY = float.Parse(vJugador[1]);
-			p1PositionX = float.Parse(vJugador[2]);
-			p1PositionY = float.Parse(vJugador[3]);
+			p1VelocityX = float.Parse(jugadorServer[0]);
+			p1VelocityY = float.Parse(jugadorServer[1]);
+			p1PositionX = float.Parse(jugadorServer[2]);
+			p1PositionY = float.Parse(jugadorServer[3]);
 
-			bVelocityX = float.Parse(vPelota[0]);
-			bVelocityY = float.Parse(vPelota[1]);
-			bPositionX = float.Parse(vPelota[2]);
-			bPositionY = float.Parse(vPelota[3]);
+			bVelocityX = float.Parse(pelota[0]);
+			bVelocityY = float.Parse(pelota[1]);
+			bPositionX = float.Parse(pelota[2]);
+			bPositionY = float.Parse(pelota[3]);
 		}
 
+		tcpCliente.closeConnection ();
+		mThread.Abort ();
 	}
 
 	public bool getConnected(){
@@ -102,8 +114,6 @@ public class socketController2 : MonoBehaviour {
 	public float getP1PositionY(){
 		return p1PositionY;
 	}
-
-
 
 	public float getBVelocityX(){
 		return bVelocityX;

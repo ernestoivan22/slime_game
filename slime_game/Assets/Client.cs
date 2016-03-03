@@ -8,7 +8,7 @@ using System.Net.Sockets;
 
 public class Client {
 	TcpClient clientSocket;
-	NetworkStream serverStream;
+	NetworkStream networkStream;
 	ASCIIEncoding encoder;
 	bool connected = false;
 
@@ -27,14 +27,14 @@ public class Client {
 		}
 	}
 
-	public String sendData(String data) {
+	public void sendData(String data) {
 		try{
-			serverStream = clientSocket.GetStream();
+			networkStream = clientSocket.GetStream();
 			//Debug.Log("Transmitting: " + data);
 			byte[] outStream = encoder.GetBytes(data);;
 
-			serverStream.Write(outStream, 0, outStream.Length);
-			serverStream.Flush();
+			networkStream.Write(outStream, 0, outStream.Length);
+			networkStream.Flush();
 			
 			// Respuesta del servidor
 			/**
@@ -43,11 +43,9 @@ public class Client {
 			String response = encoder.GetString (inStream);
 			Console.WriteLine("Server response: " + response);
 			**/
-			
-			return "";
+
 		}catch (Exception e) {
 			Debug.Log("Error..... " + e.StackTrace);
-			return ("Error..... " + e.StackTrace);
 		}
 
 	}
@@ -57,7 +55,7 @@ public class Client {
 		try{
 			// Respuesta del servidor
 			byte[] inStream = new byte[1024];
-			serverStream.Read(inStream, 0, inStream.Length);
+			networkStream.Read(inStream, 0, inStream.Length);
 			String response = encoder.GetString (inStream);
 			
 			//Console.WriteLine("Server response: " + response);
@@ -80,5 +78,10 @@ public class Client {
 	public bool getConnected(){
 		return connected;
 	}
-	
+
+	public void closeConnection() {
+		/* clean up */
+		clientSocket.Close();
+	}
+
 }

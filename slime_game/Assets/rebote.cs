@@ -15,21 +15,20 @@ public class rebote : MonoBehaviour {
 	
 	// used for velocity calculation
 	private Vector2 lastPos;
+
 	// Use this for initialization
 	void Start () {
 		// Random direction
 		rigidbody2D.velocity = new Vector2(0,0) * speed;
 		if (PlayerPrefs.GetInt ("esHost") == 1) {
 			GameObject playerGameObj = GameObject.Find("socketController1");
-			if (playerGameObj != null)
-			{
+			if (playerGameObj != null) {
 				socketController_1 = playerGameObj.GetComponent<socketController1>();
 			}
 		}
 		else{
 			GameObject playerGameObj = GameObject.Find("socketController2");
-			if (playerGameObj != null)
-			{
+			if (playerGameObj != null) {
 				socketController_2 = playerGameObj.GetComponent<socketController2>();
 			}
 		}
@@ -84,7 +83,7 @@ public class rebote : MonoBehaviour {
 			Vector3 V = velocity.normalized;
 			
 			// Reflection
-			Vector3 R = Vector3.Reflect(V, N).normalized*2;
+			Vector3 R = Vector3.Reflect(V, N).normalized * 2;
 			
 			// Assign normalized reflection with the constant speed
 			vX = R.x;

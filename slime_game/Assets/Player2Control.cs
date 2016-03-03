@@ -17,15 +17,13 @@ public class Player2Control : MonoBehaviour {
 		JumpTime  = MaxJumpTime;
 		if (PlayerPrefs.GetInt ("esHost") == 1) {
 			GameObject playerGameObj = GameObject.Find("socketController1");
-			if (playerGameObj != null)
-			{
+			if (playerGameObj != null) {
 				socketController_1 = playerGameObj.GetComponent<socketController1>();
 			}
 		}
 		else{
 			GameObject playerGameObj = GameObject.Find("socketController2");
-			if (playerGameObj != null)
-			{
+			if (playerGameObj != null) {
 				socketController_2 = playerGameObj.GetComponent<socketController2>();
 			}
 		}
@@ -56,25 +54,22 @@ public class Player2Control : MonoBehaviour {
 		move = Input.GetAxis ("Horizontal");
 		//rigidbody2D.velocity = new Vector2 (move * Speed, rigidbody2D.velocity.y);
 		if (PlayerPrefs.GetInt ("esHost") == 0) {
-			if (Input.GetKey (KeyCode.UpArrow)  && CanJump)
-			{
+			if (Input.GetKey (KeyCode.UpArrow)  && CanJump) {
 				rigidbody2D.AddForce (new Vector2 (0,JumpForce));
 				CanJump = false;
 				JumpTime  = MaxJumpTime;
 			}
 			socketController_2.setP2Velocity(rigidbody2D.velocity.x, rigidbody2D.velocity.y);
 			socketController_2.setP2Position(rigidbody2D.transform.position.x, rigidbody2D.transform.position.y);
-			//print (rigidbody2D.velocity.x + ", " + rigidbody2D.velocity.x);
 			rigidbody2D.velocity = new Vector2 (movex * Speed, movey * Speed);
-		}
-		else{
+		} else{
 			float vX = socketController_1.getP2VelocityX();
 			float vY = socketController_1.getP2VelocityY();
 			float pX = socketController_1.getP2PositionX();
 			float pY = socketController_1.getP2PositionY();
 
-			rigidbody2D.velocity = new Vector2(vX,vY);
 			rigidbody2D.transform.position = new Vector3(pX, pY, 0);
+			rigidbody2D.velocity = new Vector2(vX,vY);
 		}
 		
 

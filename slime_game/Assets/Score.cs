@@ -5,6 +5,7 @@ public class Score : MonoBehaviour {
 	public gameManager gManager;
 	public int p1Score;
 	public int p2Score;
+
 	// Use this for initialization
 	void Start () {
 	}

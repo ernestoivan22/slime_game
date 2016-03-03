@@ -20,11 +20,10 @@ public class posicion_inicio : MonoBehaviour {
 
 	void Awake () {
 		if (gManager.getPlayer1Scored ()) {
-			Vector3 temp = new Vector3(posX2,posY2,0);
+			Vector3 temp = new Vector3(posX2, posY2, 0);
 			transform.position = temp;
-		}
-		else{
-			Vector3 temp = new Vector3(posX1,posY1,0);
+		} else{
+			Vector3 temp = new Vector3(posX1, posY1, 0);
 			transform.position = temp;
 		}
 	}

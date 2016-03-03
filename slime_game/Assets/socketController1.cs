@@ -11,8 +11,9 @@ public class socketController1 : MonoBehaviour {
 	float p1VelocityX, p1VelocityY, bVelocityX, bVelocityY, p2VelocityX = 0, p2VelocityY = 0;
 	float p1PositionX, p1PositionY, bPositionX, bPositionY, p2PositionX = 2, p2PositionY = -2;
 
-	private bool mRunning;
+	private bool running;
 	Thread mThread;
+
 	//TcpListener tcp_Listener = null;
 	// Use this for initialization
 	void Start () {
@@ -20,8 +21,9 @@ public class socketController1 : MonoBehaviour {
 			/*miServer = new Server();
 			Application.LoadLevel(1);
 			creado = true;		*/
-			mRunning = true;
+			running = true;
 			ThreadStart ts = new ThreadStart(threadServer);
+
 			mThread = new Thread(ts);
 			mThread.Start();
 			print("Thread done...");
@@ -30,7 +32,17 @@ public class socketController1 : MonoBehaviour {
 
 	void OnApplicationQuit() {
 		Debug.Log("Application exit");
-		mRunning = false;
+		running = false;
+	}
+
+	void OnDestroy() {
+		Debug.Log("Socket controller 1 destroyed");
+		running = false;
+	}
+
+	void OnDisable() {
+		Debug.Log("Socket controller 1 destroyed");
+		running = false;
 	}
 
 	// Update is called once per frame
@@ -46,10 +58,10 @@ public class socketController1 : MonoBehaviour {
 	{
 		tcpServer = new Server();
 		creado = true;
-		string data,response;
+		string data;
 		string[] clientResponse;
 
-		while (mRunning) {
+		while (running) {
 			data = tcpServer.receiveData();
 			//Debug.Log (data);
 			clientResponse = data.Split('|');
@@ -63,8 +75,10 @@ public class socketController1 : MonoBehaviour {
 			//Thread.Sleep(500);
 			data = p1VelocityX + "|" + p1VelocityY + "|" + p1PositionX + "|" + p1PositionY + ";"
 				+ bVelocityX + "|" + bVelocityY + "|" + bPositionX + "|" + bPositionY; 
-			response = tcpServer.sendData(data);
+
+			tcpServer.sendData(data);
 		}
+
 		tcpServer.closeConnection ();
 		mThread.Abort ();
 	}

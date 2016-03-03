@@ -4,6 +4,7 @@ using System.Collections;
 public class wait_connection : MonoBehaviour {
 	public Texture backgroundTexture;
 	public socketController1 miSocketC;
+
 	// Use this for initialization
 	void Start () {
 	

@@ -6,6 +6,7 @@ public class gameManager : MonoBehaviour {
 	static int p2Score = 0;
 	static bool p1Scored = false;
 	int p1Won = 0;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -19,15 +20,13 @@ public class gameManager : MonoBehaviour {
 		// Jugador del lado del server
 		if (player == 0) {
 			p1Score++;
-			if(p1Score>=5){
+			if(p1Score>=5) {
 				p1Score = 0;
 				p2Score = 0;
 				p1Scored = false;
 				p1Won = 1;
 				PlayerPrefs.SetInt("p1Won",p1Won);
-//				if (PlayerPrefs.GetInt ("esHost") == 1) {
-					System.Threading.Thread.Sleep(80);
-//				}
+				System.Threading.Thread.Sleep(80);
 				Application.LoadLevel (2);
 			}
 			else{
@@ -39,7 +38,7 @@ public class gameManager : MonoBehaviour {
 		// Jugador del lado del cliente
 		else{
 			p2Score++;
-			if(p2Score>=5){
+			if(p2Score>=5) {
 				p1Score = 0;
 				p2Score = 0;
 				p1Scored = false;
@@ -53,14 +52,13 @@ public class gameManager : MonoBehaviour {
 				System.Threading.Thread.Sleep(80);
 				Application.LoadLevel(1);
 			}
-
 		}
-
 	}
 
 	public bool getPlayer1Scored(){
 		return p1Scored;
 	}
+
 	void OnGUI(){
 		GUILayout.BeginArea(new Rect (0, 0, Screen.width, 20),"");  
 		GUILayout.BeginHorizontal();

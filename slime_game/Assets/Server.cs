@@ -67,7 +67,7 @@ public class Server {
 
 	}
 
-	public String sendData(String data) {
+	public void sendData(String data) {
 		try{
 			Byte[] sendBytes = encoder.GetBytes(data);
 			networkStream.Write(sendBytes, 0, sendBytes.Length);
@@ -80,10 +80,8 @@ public class Server {
 			String response = encoder.GetString (inStream);
 			Console.WriteLine("Client response: " + response);
 			**/
-			return "";
 		}catch (Exception e) {
 			Debug.Log("Error..... " + e.StackTrace);
-			return("Error..... " + e.StackTrace);
 		}
 
 	}
